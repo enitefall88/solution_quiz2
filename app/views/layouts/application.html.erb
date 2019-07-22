@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Quiz2</title>
+    <title>Ideas</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,32 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav>
+        <!-- <a href="/">Home</a> -->
+      
+        |
+        <%= link_to 'New idea', new_idea_path %>
+        |
+        <%= link_to 'All ideas', ideas_path %>
+        |
+        <% if user_signed_in? %>
+          Hello <%= current_user.full_name %>
+          <%= link_to "Sign Out", session_path, method: :delete, data: {confirm: "Are you sure you want to sign out?"} %>
+        <% else %>
+          <%= link_to "Sign In", new_session_path %>
+          |
+          <%= link_to "Sign Up", new_user_path %>
+        <% end %>
+      </nav>
+    </header>
+    <main class="container-fluid">
+      <% flash.each do |type, message| %>
+        <div class="flash flash-<%= type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
