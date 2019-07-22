@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_many :ideas, dependent: :destroy
+    has_many :reviews, dependent: :nullify
 
     has_secure_password
     
